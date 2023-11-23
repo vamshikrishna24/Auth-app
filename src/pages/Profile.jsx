@@ -73,6 +73,7 @@ function Profile() {
             "content-type": "application/json",
           },
           body: JSON.stringify(formData),
+          credentials: "include",
         }
       );
       const data = await result.json();
@@ -94,6 +95,7 @@ function Profile() {
         `${process.env.REACT_APP_BACKEND}/api/user/delete/${currentUser._id}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
       const data = await res.json();

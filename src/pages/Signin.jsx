@@ -26,6 +26,7 @@ function Signin() {
             "content-type": "application/json",
           },
           body: JSON.stringify(formData),
+          credentials: "include",
         }
       );
       const data = await res.json();
