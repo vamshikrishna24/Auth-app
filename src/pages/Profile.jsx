@@ -66,14 +66,13 @@ function Profile() {
     try {
       dispatch(updateUserStart());
       const result = await fetch(
-        `http://localhost:8000/api/user/update/${currentUser._id}`,
+        `${process.env.REACT_APP_BACKEND}/api/user/update/${currentUser._id}`,
         {
           method: "POST",
           headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify(formData),
-          credentials: "include",
         }
       );
       const data = await result.json();
@@ -92,10 +91,9 @@ function Profile() {
     try {
       dispatch(deleteUserStart());
       const res = await fetch(
-        `http://localhost:8000/api/user/delete/${currentUser._id}`,
+        `${process.env.REACT_APP_BACKEND}/api/user/delete/${currentUser._id}`,
         {
           method: "DELETE",
-          credentials: "include",
         }
       );
       const data = await res.json();
@@ -111,7 +109,7 @@ function Profile() {
 
   const handleSignOut = async () => {
     try {
-      await fetch("http://localhost:8000/api/auth/signout");
+      await fetch(`${process.env.REACT_APP_BACKEND}/api/auth/signout`);
       dispatch(signOut());
     } catch (error) {}
   };

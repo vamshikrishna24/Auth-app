@@ -15,13 +15,16 @@ function Signup() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:8000/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND}/api/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (data.success === false) {
         setError(true);

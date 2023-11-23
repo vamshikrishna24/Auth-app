@@ -13,18 +13,20 @@ function OAuth() {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
-      const res = await fetch("http://localhost:8000/api/auth/google", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          name: result.user.displayName,
-          email: result.user.email,
-          photoUrl: result.user.photoURL,
-        }),
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND}/api/auth/google`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: result.user.displayName,
+            email: result.user.email,
+            photoUrl: result.user.photoURL,
+          }),
+        }
+      );
       const data = await res.json();
       dispatch(signInSuccess(data));
       navigate("/");
